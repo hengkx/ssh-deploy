@@ -1,0 +1,30 @@
+name: 'SSH Auto Deploy'
+description: 'ssh auto deploy'
+author: 'hengkx'
+branding:
+  icon: 'crosshair'
+  color: 'gray-dark'
+inputs:
+  HOST:
+    description: 'remote host'
+    required: true
+  USERNAME:
+    description: 'username'
+    required: true
+  PASSWORD:
+    description: 'password'
+    required: true
+  PORT:
+    description: 'port'
+    default: 22
+  SOURCE:
+    description: 'local path'
+    required: true
+  TARGET:
+      description: 'remote target'
+      required: true
+  AFTER_COMMAND:
+    description: 'upload success execute command'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

@@ -1,0 +1,35 @@
+{
+  "name": "ssh-deploy",
+  "version": "1.0.0",
+  "description": "ssh deploy action",
+  "main": "lib/ssh-deploy.js",
+  "scripts": {
+    "build": "tsc && ncc build",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "pre-checkin": "npm run format && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hengkx/ssh-deploy.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "author": "hengkx",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "ssh2": "^0.8.9"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "@types/ssh2": "^0.5.43",
+    "@zeit/ncc": "^0.22.3",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.6"
+  }
+}
