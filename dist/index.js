@@ -17940,7 +17940,7 @@ module.exports = require("util");
 /***/ 724:
 /***/ (function(module) {
 
-module.exports = {"_from":"ssh2-streams@~0.4.10","_id":"ssh2-streams@0.4.10","_inBundle":false,"_integrity":"sha512-8pnlMjvnIZJvmTzUIIA5nT4jr2ZWNNVHwyXfMGdRJbug9TpI3kd99ffglgfSWqujVv/0gxwMsDn9j9RVst8yhQ==","_location":"/ssh2-streams","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"ssh2-streams@~0.4.10","name":"ssh2-streams","escapedName":"ssh2-streams","rawSpec":"~0.4.10","saveSpec":null,"fetchSpec":"~0.4.10"},"_requiredBy":["/ssh2"],"_resolved":"https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.4.10.tgz","_shasum":"48ef7e8a0e39d8f2921c30521d56dacb31d23a34","_spec":"ssh2-streams@~0.4.10","_where":"/Users/xuzhiheng/Documents/GitHub/ssh-deploy/node_modules/ssh2","author":{"name":"Brian White","email":"mscdex@mscdex.net"},"bugs":{"url":"https://github.com/mscdex/ssh2-streams/issues"},"bundleDependencies":false,"dependencies":{"asn1":"~0.2.0","bcrypt-pbkdf":"^1.0.2","streamsearch":"~0.1.2"},"deprecated":false,"description":"SSH2 and SFTP(v3) client/server protocol streams for node.js","engines":{"node":">=5.2.0"},"homepage":"https://github.com/mscdex/ssh2-streams#readme","keywords":["ssh","ssh2","sftp","secure","protocol","streams","client","server"],"licenses":[{"type":"MIT","url":"http://github.com/mscdex/ssh2-streams/raw/master/LICENSE"}],"main":"./index","name":"ssh2-streams","repository":{"type":"git","url":"git+ssh://git@github.com/mscdex/ssh2-streams.git"},"scripts":{"test":"node test/test.js"},"version":"0.4.10"};
+module.exports = {"_args":[["ssh2-streams@0.4.10","C:\\Users\\Tom\\Documents\\GitHub\\ssh-deploy"]],"_from":"ssh2-streams@0.4.10","_id":"ssh2-streams@0.4.10","_inBundle":false,"_integrity":"sha512-8pnlMjvnIZJvmTzUIIA5nT4jr2ZWNNVHwyXfMGdRJbug9TpI3kd99ffglgfSWqujVv/0gxwMsDn9j9RVst8yhQ==","_location":"/ssh2-streams","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"ssh2-streams@0.4.10","name":"ssh2-streams","escapedName":"ssh2-streams","rawSpec":"0.4.10","saveSpec":null,"fetchSpec":"0.4.10"},"_requiredBy":["/ssh2"],"_resolved":"https://registry.npmjs.org/ssh2-streams/-/ssh2-streams-0.4.10.tgz","_spec":"0.4.10","_where":"C:\\Users\\Tom\\Documents\\GitHub\\ssh-deploy","author":{"name":"Brian White","email":"mscdex@mscdex.net"},"bugs":{"url":"https://github.com/mscdex/ssh2-streams/issues"},"dependencies":{"asn1":"~0.2.0","bcrypt-pbkdf":"^1.0.2","streamsearch":"~0.1.2"},"description":"SSH2 and SFTP(v3) client/server protocol streams for node.js","engines":{"node":">=5.2.0"},"homepage":"https://github.com/mscdex/ssh2-streams#readme","keywords":["ssh","ssh2","sftp","secure","protocol","streams","client","server"],"licenses":[{"type":"MIT","url":"http://github.com/mscdex/ssh2-streams/raw/master/LICENSE"}],"main":"./index","name":"ssh2-streams","repository":{"type":"git","url":"git+ssh://git@github.com/mscdex/ssh2-streams.git"},"scripts":{"test":"node test/test.js"},"version":"0.4.10"};
 
 /***/ }),
 
@@ -18337,7 +18337,9 @@ class Sftp {
                     yield this.mkdir(remotePath);
                 }
                 const dirs = fs.readdirSync(localPath);
-                yield Promise.all(dirs.map(name => this.uploadDir(path.join(localPath, name), path.join(remotePath, name))));
+                for (const name of dirs) {
+                    yield this.uploadDir(path.join(localPath, name), path.join(remotePath, name));
+                }
             }
         });
     }

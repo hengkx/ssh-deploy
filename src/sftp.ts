@@ -56,7 +56,7 @@ class Sftp {
   async exists(path: string): Promise<boolean> {
     const sftp = await this.getSftp();
     return new Promise((resolve, reject) => {
-      (sftp as any).exists(path, res => {
+      sftp.exists(path, res => {
         resolve(res);
       });
     });
@@ -71,14 +71,12 @@ class Sftp {
         await this.mkdir(remotePath);
       }
       const dirs = fs.readdirSync(localPath);
-      await Promise.all(
-        dirs.map(name =>
-          this.uploadDir(
-            path.join(localPath, name),
-            path.join(remotePath, name)
-          )
-        )
-      );
+      for (const name of dirs) {
+        await this.uploadDir(
+          path.join(localPath, name),
+          path.join(remotePath, name)
+        );
+      }
     }
   }
 }
