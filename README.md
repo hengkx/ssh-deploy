@@ -7,7 +7,7 @@ See [action.yml](action.yml)
 Basic:
 ```yaml
 steps:
-- uses: hengkx/ssh-deploy@v1.0.0
+- uses: hengkx/ssh-deploy@v1.0.1
   env:
     HOST: ${{ secrets.DEPLOY_HOST }}
     USERNAME: ${{ secrets.DEPLOY_USERNAME }}
