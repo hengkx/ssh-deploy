@@ -34,9 +34,8 @@ class Sftp {
   }
 
   async mkdir(path: string) {
-    const sftp = await this.getSftp();
     return new Promise((resolve, reject) => {
-      sftp.mkdir(path, err => {
+      this.conn.exec(`mkdir -p ${path}`, err => {
         if (err) return reject(err);
         resolve('');
       });
