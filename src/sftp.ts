@@ -28,7 +28,7 @@ class Sftp {
     return new Promise((resolve, reject) => {
       sftp.fastPut(localPath, remotePath, err => {
         if (err) return reject(err);
-        resolve();
+        resolve('');
       });
     });
   }
@@ -38,7 +38,7 @@ class Sftp {
     return new Promise((resolve, reject) => {
       sftp.mkdir(path, err => {
         if (err) return reject(err);
-        resolve();
+        resolve('');
       });
     });
   }
@@ -63,20 +63,24 @@ class Sftp {
   }
 
   async uploadDir(localPath: string, remotePath: string) {
-    const stat = fs.statSync(localPath);
-    if (stat.isFile()) {
-      await this.fastPut(localPath, remotePath);
-    } else if (stat.isDirectory()) {
-      if (!(await this.exists(remotePath))) {
-        await this.mkdir(remotePath);
+    if (fs.existsSync(localPath)) {
+      const stat = fs.statSync(localPath);
+      if (stat.isFile()) {
+        await this.fastPut(localPath, remotePath);
+      } else if (stat.isDirectory()) {
+        if (!(await this.exists(remotePath))) {
+          await this.mkdir(remotePath);
+        }
+        const dirs = fs.readdirSync(localPath);
+        for (const name of dirs) {
+          await this.uploadDir(
+            path.join(localPath, name),
+            path.join(remotePath, name)
+          );
+        }
       }
-      const dirs = fs.readdirSync(localPath);
-      for (const name of dirs) {
-        await this.uploadDir(
-          path.join(localPath, name),
-          path.join(remotePath, name)
-        );
-      }
+    } else {
+      throw new Error('file does not exist');
     }
   }
 }
