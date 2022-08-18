@@ -21,7 +21,7 @@
   "author": "hengkx",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.3.0",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.0",
     "ssh2": "^1.0.0"
   },
